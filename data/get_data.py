@@ -7,7 +7,7 @@ import os
 import shutil
 
 
-SERVER_URL = 'http://icarus.cs.weber.edu/~hvalle/cs4580/data/pandas02Data.zip'
+SERVER_URL = 'https://www.kaggle.com/datasets/zynicide/wine-reviews'
 
 # TODO: Create a function to download files from Kaggle directly by passing the dataset name
 
@@ -19,7 +19,7 @@ def download_file(url, file_name):
 
     if file_name.endswith('.zip'):   # TODO: Check extension, if it is zip
             print(f"'{file_name}' is a zip file. Unzipping...")
-            unzip_file(file_name) # Call unzip_file()
+            extract_zip_file(file_name) # Call unzip_file()
     else:
         print(f"'{file_name}' is not a zip file. No unzipping necessary.")
 
@@ -40,9 +40,9 @@ def extract_zip_file(file_name):
 def main():
     """Driven Function
     """
-    data02 = 'hotel-booking-demand.zip'
-    download_file(SERVER_URL, data02)
-    extract_zip_file(data02) # unzip_file(data01)
+    data = 'wine_reviews.zip'
+    download_file(SERVER_URL, data)
+    extract_zip_file(data) # unzip_file(data01)
     # TODO: Set input user options to extract files 
 
 
