@@ -1,53 +1,47 @@
-
-"""Download data from out server
-"""
 import urllib.request
 import zipfile
 import os
-import shutil
 
+# Server URL for the file to download
+SERVER_URL = 'https://icarus.cs.weber.edu/~hvalle/cs4580/data/plottingDemo01.zip'
 
-SERVER_URL = 'https://www.kaggle.com/datasets/zynicide/wine-reviews'
+def download_file(url):
+    """
+    Download the file from the provided URL.
+    """
+    # Extract file name from the URL
+    file_name = os.path.basename(url)
 
-# TODO: Create a function to download files from Kaggle directly by passing the dataset name
-
-def download_file(url, file_name):
-    # TODO: Download to pwd
-    full_url = url + file_name
-    urllib.request.urlretrieve(full_url, file_name)
+    # Download the file
+    urllib.request.urlretrieve(url, file_name)
     print(f"'{file_name}' has been downloaded.")
 
-    if file_name.endswith('.zip'):   # TODO: Check extension, if it is zip
-            print(f"'{file_name}' is a zip file. Unzipping...")
-            extract_zip_file(file_name) # Call unzip_file()
+    # Check if the file is a zip file and unzip if necessary
+    if file_name.endswith('.zip'):
+        print(f"'{file_name}' is a zip file. Unzipping...")
+        extract_zip_file(file_name)
     else:
         print(f"'{file_name}' is not a zip file. No unzipping necessary.")
 
 def extract_zip_file(file_name):
-    # TODO: Unzip file
     """
     Unzip the file in the current working directory
     """
     if zipfile.is_zipfile(file_name):
-          os.getcwd()
-          with zipfile.ZipFile(file_name, 'r') as zip_ref:
+        with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(os.getcwd())
-            os.path.join(os.getcwd, file_name)
-
+        print(f"'{file_name}' has been unzipped in the current directory.")
     else:
         print(f"'{file_name}' is not a valid zip file or it may be corrupted.")
 
 def main():
-    """Driven Function
     """
-    data = 'wine_reviews.zip'
-    download_file(SERVER_URL, data)
-    extract_zip_file(data) # unzip_file(data01)
-    # TODO: Set input user options to extract files 
+    Driver Function
+    """
+    # Download and unzip the file from the server
+    download_file(SERVER_URL)
 
-
-
-    print('Main Function')
+    print('Main Function complete.')
 
 if __name__ == '__main__':
     main()
