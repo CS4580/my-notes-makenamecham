@@ -3,7 +3,7 @@ import zipfile
 import os
 
 # Server URL for the file to download
-SERVER_URL = 'https://icarus.cs.weber.edu/~hvalle/cs4580/data/plottingDemo01.zip'
+SERVER_URL = 'https://icarus.cs.weber.edu/~hvalle/cs4580/data/seaborData.zip'
 
 def download_file(url):
     """
