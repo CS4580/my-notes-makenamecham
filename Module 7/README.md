@@ -20,6 +20,8 @@ icarus.cs.weber.edu:~hvalle/cs4580/data/movies.csv
 
 ### KNN-Euclidean Distance
 
+Note: All code 
+
 The Euclidean distance is the distance between points in `N-dimensional` space
 
 Formula
@@ -37,3 +39,23 @@ Fidn the distance between these points:
 - y = (4, 4)
 
 Distance = 5.65685...
+
+``` python
+# see
+def euclidean_distance()
+```
+
+### KNN with Jaccard Similarity Index
+Compares members of two individual sets to determine which members are `shared` and which are `distinct`.
+The index measures the similarity between the two sets.
+
+$$
+J(A, B) = \frac{|A \cap B|}{|A \cup B|}
+$$
+
+Ex: $A = {1, 2, 3, 4}$ and $B = {3, 4, 5, 6}$ = $\frac{2}{6}$ or $0.333$
+
+``` python
+# see
+def jaccard_similarity_normal()
+```
