@@ -14,6 +14,15 @@ def metric_stub(base_case_value, comparator_value):
     return 0
 
 
+def print_top_k(df, sorted_value, comparison_type):
+    print(f'Top {K} closest matches by {comparison_type}')
+    counter = 1
+    for idx, row in df.head(K).iterrows():
+        print(f"Top {counter} match: [{idx}]: {row['year']} "
+              f"{row['title']}, {row['genres']} {row[sorted_value]}")
+        counter += 1
+
+
 def knn_analysis_driver(data_df, base_case, comparison_type, metric_func, sorted_value='metric'):
     df = data_df.copy()  # Make a copy of the data frame
     # WIP: Create df of filter data
@@ -23,14 +32,19 @@ def knn_analysis_driver(data_df, base_case, comparison_type, metric_func, sorted
     sorted_df = df.sort_value(by=sorted_value)
     sorted_df.drop(BASE_CASE_ID, inplace=True)  # Drop case base
     print(sorted_df['title'].head(K))  # print first 10 values
+    print_top_k(sorted_df, sorted_value, comparison_type)
+
+
+def euclidean_distance(base_case_year: int, comparator_year: int):
+    return abs(base_case_year - comparator_year)
 
 
 def main():
     # TASK 1: Get dataset from server
     print(f'Task 1: Download dataset from server')
     dataset_file = 'movies.csv'
-
     gt.download_dataset(gt.ICARUS_CS4580_DATASET_URL, dataset_file)
+
     # TASK 2: Load  data_file into a DataFrame
     print(f'Task 2: Load movie data into a DataFrame')
     data_file = f'{gt.DATA_FOLDER}/{dataset_file}'
@@ -45,6 +59,11 @@ def main():
     print(f"Comparing all movies to our case: {base_case['title']}")
     knn_analysis_driver(data_df=data, base_case=base_case, comparison_type='genres',
                         metric_func=metric_stub, sorted_value='metric')
+
+    # Task 4: Euclidean Distance based on Year
+    print(f'\ntask 4: KNN Analysis with Euclidean Distance')
+    knn_analysis_driver(data_df=data, base_case=base_case, comparison_type='year',
+                        metric_func=euclidean_distance, sorted_value='Euclidean_distance')
 
 
 if __name__ == '__main__':
