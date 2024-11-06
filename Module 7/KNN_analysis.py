@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import get_data as gt  # your package
+import Levenshtein
 
 # Constants
 K = 10  # number of closest matches
@@ -125,7 +126,7 @@ def main():
                         comparison_type='genres', metric_func=jaccard_similarity_normal,
                         sorted_value='jaccard_similarity')
 
-    # Task : Jaccard Weighted Similarity
+    # Task 6: Jaccard Weighted Similarity
     print(f'\nTask 6: KNN Analysis with Jaccard Similarity Weighted')
     base_case = data.loc[BASE_CASE_ID]
     second_case = data.loc[SECOND_CASE_ID]
@@ -139,6 +140,16 @@ def main():
     knn_analysis_driver(data_df=data, base_case=base_case,
                         comparison_type='genres', metric_func=jaccard_similarity_weighted,
                         sorted_value='jaccard_similarity_weighted')
+
+    # Task 7: KNN with Levenshtein Distance
+    print(f'\nTask 7: KNN with Levenshtein Distance')
+    data = gt.load_data(data_file, index_col='IMBD_id')
+    base_case = data.loc[BASE_CASE_ID]
+    print(f"Comparing all movies to our base case:[{base_case['title']}]")
+
+    knn_analysis_driver(data_df=data, base_case=base_case,
+                        comparison_type='genres', metric_func=Levenshtein.distance,
+                        sorted_value='levenshtein_distance')
 
 
 if __name__ == '__main__':
