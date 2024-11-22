@@ -31,7 +31,7 @@ $
 
 Where:
 - $p = (p_1, p_2, \dots, p_n)$
-- $p = (q_1, q_2, \dots, q_n)$
+- $q = (q_1, q_2, \dots, q_n)$
 
 #### task:
 Fidn the distance between these points:
@@ -74,7 +74,7 @@ def jaccard_similarity_weighted()
 ### KNN with Levenshtein Distance
 This is the most common form of edit-based metric, which generally quantifies to work required to transform
 a string from an initial sequence to a target sequence.
-- It is used to determine teh difference between two sequences (strings)
+- It is used to determine the difference between two sequences (strings)
 - Is the distance between two words (minimum number of digits edits)
     - Insertions, deletions, or substitutions
 
@@ -152,4 +152,32 @@ How do we measure `accuracy` of the prediction?
 ```python
 accuracy_metric.py
 ```
+
+### Confusion Matrix
+It is performed to measure how well your classification model is. The model could be `binary` or multi-class.
+Each entry in a Confusion Matrix represents a specific combination of `predicted vs. actual` classes. 
+
+For binary classification, you have `four` parts:
+- `True Positive (TP)`: Correctly predicted positive observations
+- `False Positive (FP)`: Incorrectly predicted positive observations (`Type 1 Error`)
+- `True Negative (TN)`: Correctly predicted negative observations 
+- `False Negative (FN)`: Incorrectly predicted positive observations (`Type 2 Error`)
+
+The structure of the matrix is as follows:
+|       | Predicted Positive | Predicted Negative |
+|-------|--------------------|--------------------
+|Actual Positive | True Positive (TP) | False Negative (FN) |
+|Actual Negative | False Positive (FP) | True Negative (TN) |
+
+Key metrics:
+- `Accuracy` = $\frac{{TP + TN}}{{TP + TN + FP + FN}}$
+- `Precision` = $\frac{{TP}}{{TP + FP}}$ (Useful for imbalanced classes)
+- `Sensitivity (Recall)` = $\frac{{TP}}{{TP + FN}}$
+- `F1 Score` = $2 \times \frac{{Precision \ Sensitivity(Recall)}}{{Precision + Sensitivity(Recall)}}$ ( Harmonic mean of Precision and Recall)
+
+```python
+# See
+confusion_matrix.py
+```
+
 
